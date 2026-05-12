@@ -1,0 +1,10 @@
+node_modules
+.next
+dist
+dist-site
+coverage
+.env
+.env.local
+.vercel
+*.log
+reports

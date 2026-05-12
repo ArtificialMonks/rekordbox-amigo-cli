@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DJ_PLAYLISTS Version="1.0.0">
+  <PRODUCT Name="rekordbox" Version="7.2.3" Company="AlphaTheta"/>
+  <COLLECTION Entries="3">
+    <TRACK TrackID="1" Name="Deep Acid Motion" Artist="AM Test" Genre="House" AverageBpm="126" Location="file://localhost/tmp/deep-acid-motion.mp3" Tonality="8A" Comments="#build" Rating="4" Colour="0x00FF00"/>
+    <TRACK TrackID="2" Name="Deep Acid Motion" Artist="AM Test" AverageBpm="126" Location="file://localhost/tmp/deep-acid-motion-copy.mp3"/>
+    <TRACK TrackID="3" Name="Morning Fog" Artist="AM Test" Genre="Ambient" AverageBpm="92" Location="file://localhost/tmp/morning-fog.mp3" Comments="#arrival"/>
+  </COLLECTION>
+  <PLAYLISTS>
+    <NODE Type="0" Name="ROOT">
+      <NODE Name="Afterhours" Type="1" Entries="2">
+        <TRACK Key="1"/>
+        <TRACK Key="2"/>
+      </NODE>
+    </NODE>
+  </PLAYLISTS>
+</DJ_PLAYLISTS>
