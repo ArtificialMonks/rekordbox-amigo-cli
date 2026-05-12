@@ -36,6 +36,7 @@ main {
   align-items: center;
   padding: 56px clamp(20px, 6vw, 88px);
   border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
 
 .heroText {
@@ -64,6 +65,7 @@ h1 {
   line-height: 0.94;
   max-width: 880px;
   overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 h2 {
@@ -77,6 +79,7 @@ h2 {
   font-size: 21px;
   line-height: 1.45;
   max-width: 640px;
+  overflow-wrap: anywhere;
 }
 
 .actions {
@@ -117,29 +120,121 @@ h2 {
   font-family: "SFMono-Regular", Consolas, monospace;
   box-shadow: 0 22px 80px rgb(23 22 19 / 16%);
   min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .terminal span {
+  display: block;
   color: var(--gold);
   overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .terminal strong {
+  display: block;
   margin-top: 24px;
   font-size: 24px;
+  overflow-wrap: anywhere;
 }
 
 .terminal p,
 .terminal em {
+  display: block;
   margin: 10px 0 0;
   color: #d8d1c2;
   font-style: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .band,
-.install {
+.install,
+.auditPanel {
   padding: 72px clamp(20px, 6vw, 88px);
   border-bottom: 1px solid var(--line);
+}
+
+.auditPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+  gap: 40px;
+  align-items: start;
+  background: var(--white);
+}
+
+.auditIntro p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.uploader {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  background: var(--paper);
+}
+
+.uploader label,
+.textButton {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.uploader input {
+  width: 100%;
+  margin: 18px 0;
+}
+
+.emptyState,
+.error,
+.auditResult p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.error {
+  color: #9f2f28;
+}
+
+.auditResult {
+  display: grid;
+  gap: 18px;
+}
+
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.statGrid span {
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 8px;
+  color: var(--muted);
+}
+
+.statGrid strong {
+  display: block;
+  color: var(--ink);
+  font-size: 28px;
 }
 
 .featureGrid {
@@ -198,13 +293,24 @@ code {
 
 @media (max-width: 860px) {
   .hero,
-  .split {
+  .split,
+  .auditPanel {
     grid-template-columns: 1fr;
   }
 
   .hero {
     min-height: auto;
     padding-top: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .heroText,
+  .terminal {
+    width: min(330px, calc(100vw - 60px));
+    max-width: min(330px, calc(100vw - 60px));
   }
 
   .featureGrid {
@@ -212,12 +318,27 @@ code {
   }
 
   h1 {
-    font-size: 42px;
+    font-size: 38px;
     line-height: 0.98;
+    max-width: min(330px, calc(100vw - 60px));
+  }
+
+  h2,
+  .lede,
+  .auditIntro p:not(.eyebrow),
+  .split p:not(.eyebrow) {
+    max-width: min(330px, calc(100vw - 60px));
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   .terminal {
     min-height: 300px;
     padding: 24px;
+    font-size: 15px;
+  }
+
+  .statGrid {
+    grid-template-columns: 1fr;
   }
 }

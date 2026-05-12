@@ -30,4 +30,9 @@ Artificial Monks can build a complementary CLI-first workflow:
 - Start safer than a full library platform.
 - Use the Rekordbox XML as a bridge.
 - Make tedious library prep conversational and creative.
-- Turn audits into subscriber acquisition: free report, paid tagging packs, future AI assistant.
+- Turn audits into subscriber acquisition: free browser-local report, paid tagging packs, future AI assistant.
+- Compete less on "library fixer" and more on conversational taxonomy, set narrative, and privacy-first creative guidance.
+
+## Competitive Takeaway
+
+Library audits are useful but not enough as a standalone business. Open-source tools and mature desktop products already cover parts of missing-file, duplicate, and metadata cleanup. Rekordbox Amigo should use audit output as the diagnostic moment, then differentiate through Amigo-guided tagging, personal taxonomy, and set-journey work.

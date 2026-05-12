@@ -33,6 +33,7 @@ export function renderMarkdown(audit: LibraryAudit): string {
     const suggestions = finding.suggestions.map((suggestion) => `  - ${suggestion}`).join("\n");
     return `### ${finding.artist} - ${finding.name}\n\n- Issues: ${issues}\n- Location: \`${finding.location}\`\n\n${suggestions}`;
   }).join("\n\n");
+  const nextAction = buildNextAction(audit);
 
   return `# Rekordbox Amigo Audit
 
@@ -59,9 +60,26 @@ ${issueRows || "| No issues found | 0 |"}
 ## First Action List
 
 ${topFindings || "No findings. Your library export looks clean from the current rules."}
+
+## Next Action
+
+${nextAction}
 `;
 }
 
 export function labelIssue(issue: TrackIssue): string {
   return issue.replaceAll("_", " ");
+}
+
+function buildNextAction(audit: LibraryAudit): string {
+  if (audit.summary.missingFiles > 0) {
+    return `Start by fixing missing files. Then rerun \`rb-amigo audit --xml ${audit.sourceXml} --format json --out ./reports/library-audit.json\`.`;
+  }
+  if (audit.summary.weakMetadataTracks > 0) {
+    return `Create a review crate for the first ${Math.min(audit.summary.weakMetadataTracks, 25)} weak-metadata tracks, then run \`rb-amigo tags --audit ./reports/library-audit.json\`.`;
+  }
+  if (audit.summary.possibleDuplicates > 0) {
+    return "Compare possible duplicates manually before deleting. Preserve edits, remasters, radio versions, and clean/dirty variants when they serve different set roles.";
+  }
+  return "Ask Amigo for a set plan: `rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours --vibe hypnotic --curve wave`.";
 }

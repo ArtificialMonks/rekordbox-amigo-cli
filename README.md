@@ -1,8 +1,10 @@
 # Rekordbox Amigo CLI
 
-A safe, read-only first step toward a better DJ library workflow.
+A local-first DJ library assistant for Rekordbox.
 
-`rb-amigo` audits Rekordbox XML exports, spots broken library patterns, and turns the result into practical tagging and set-prep prompts. It is built for DJs who want their library to feel searchable, creative, and performance-ready without risky direct edits to Rekordbox internals.
+`rb-amigo` starts with a safe audit, then helps DJs decide what to do next: fix broken references, review weak metadata, draft tag suggestions, and shape set arcs. The CLI is the engine; Amigo is the workflow.
+
+Try the browser audit at https://rekordbox-amigo-cli.vercel.app. It runs locally in the browser and does not upload your XML.
 
 ## What It Does Today
 
@@ -12,6 +14,7 @@ A safe, read-only first step toward a better DJ library workflow.
 - Produces Markdown or JSON reports.
 - Suggests starter tags and set chapters from the audit result.
 - Includes an Amigo-style conversational command for guided library work.
+- Builds set-prep prompts with context, vibe, energy curve, and anchor track.
 
 ## What It Does Not Do Yet
 
@@ -21,6 +24,8 @@ A safe, read-only first step toward a better DJ library workflow.
 - It does not pretend genre AI is solved. Suggestions are transparent and editable.
 
 ## Install
+
+For DJs, the hosted browser audit is the easiest first step. For developers and power users:
 
 ```bash
 npm install
@@ -32,10 +37,21 @@ Then run:
 
 ```bash
 rb-amigo audit --xml ./rekordbox.xml --format markdown --out ./reports/library-audit.md
+rb-amigo audit --xml ./rekordbox.xml --format json --out ./reports/library-audit.json
 rb-amigo tags --audit ./reports/library-audit.json
-rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours
+rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours --vibe hypnotic --curve wave --anchor "your track"
 rb-amigo amigo
 ```
+
+## Privacy
+
+Your library is your identity. The first version is local-first:
+
+- The browser audit parses XML in your browser.
+- The CLI runs on your machine.
+- No direct Rekordbox database writes.
+- No automatic cloud backup or silent sync.
+- Suggested tags are clearly separate from source metadata.
 
 ## Export Rekordbox XML
 
