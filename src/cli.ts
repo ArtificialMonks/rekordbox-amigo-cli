@@ -7,7 +7,7 @@ import { Command } from "commander";
 import { auditLibrary } from "./audit";
 import { parseRekordboxXml } from "./rekordbox";
 import { renderConsoleSummary, writeReport, type ReportFormat } from "./report";
-import { renderSetPlan } from "./setPlan";
+import { renderSetPlan, type EnergyCurve } from "./setPlan";
 
 const program = new Command();
 
@@ -17,12 +17,24 @@ program
   .version("0.1.0");
 
 program
+  .command("privacy")
+  .description("Explain what stays local and what rb-amigo never changes.")
+  .action(() => {
+    output.write(renderPrivacyNotice());
+  });
+
+program
   .command("audit")
   .description("Audit a Rekordbox XML export without modifying Rekordbox or music files.")
   .requiredOption("--xml <path>", "Path to Rekordbox XML export")
   .option("--out <path>", "Report output path")
   .option("--format <format>", "json or markdown", "markdown")
-  .action(async (options: { xml: string; out?: string; format: ReportFormat }) => {
+  .option("--privacy", "Print the local privacy boundary before running")
+  .action(async (options: { xml: string; out?: string; format: ReportFormat; privacy?: boolean }) => {
+    if (options.privacy) {
+      output.write(renderPrivacyNotice());
+      output.write("\n");
+    }
     const audit = await runAudit(options.xml);
     output.write(chalk.green("Rekordbox Amigo audit complete.\n"));
     output.write(renderConsoleSummary(audit));
@@ -57,16 +69,31 @@ program
   .option("--hours <number>", "Set length in hours", "2")
   .option("--context <text>", "Set context, e.g. afterhours, festival, warmup", "club")
   .option("--vibe <text>", "Mood or feeling, e.g. hypnotic, soulful, pressure, sunrise")
-  .option("--curve <curve>", "Energy curve: wave, low-to-high, or flat", "wave")
+  .option("--energy <curve>", "Energy curve: wave, low-to-high, flat, or double-peak")
+  .option("--curve <curve>", "Alias for --energy", "wave")
   .option("--anchor <track>", "Anchor track or reference track to build around")
-  .action(async (options: { audit: string; hours: string; context: string; vibe?: string; curve: "low-to-high" | "wave" | "flat"; anchor?: string }) => {
+  .option("--bridge <text>", "Transition goal, e.g. deep house to organic")
+  .option("--avoid <text>", "Things to avoid, e.g. anything played in last 30 days")
+  .action(async (options: {
+    audit: string;
+    hours: string;
+    context: string;
+    vibe?: string;
+    energy?: EnergyCurve;
+    curve: EnergyCurve;
+    anchor?: string;
+    bridge?: string;
+    avoid?: string;
+  }) => {
     const audit = JSON.parse(await readFile(options.audit, "utf8")) as Awaited<ReturnType<typeof runAudit>>;
     output.write(renderSetPlan(audit, {
       hours: Number(options.hours),
       context: options.context,
       vibe: options.vibe,
-      curve: options.curve,
-      anchor: options.anchor
+      curve: options.energy ?? options.curve,
+      anchor: options.anchor,
+      bridge: options.bridge,
+      avoid: options.avoid
     }));
   });
 
@@ -86,9 +113,11 @@ program
       } else if (answer.includes("tag")) {
         output.write("Run an audit as JSON first, then: rb-amigo tags --audit ./reports/library-audit.json\n");
       } else if (answer.includes("set")) {
-        output.write("Run: rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours --vibe hypnotic --curve wave --anchor \"your track\"\n");
+        output.write("Run: rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours --vibe hypnotic --energy wave --anchor \"your track\" --bridge \"deep house to organic\"\n");
+      } else if (answer.includes("privacy")) {
+        output.write(renderPrivacyNotice());
       } else {
-        output.write("I can help with audits, tag cleanup, and chapter-based set prep. Start with an XML audit.\n");
+        output.write("I can help with audits, privacy, tag cleanup, and chapter-based set prep. Start with an XML audit.\n");
       }
     }
 
@@ -98,6 +127,18 @@ program
 async function runAudit(xmlPath: string) {
   const library = await parseRekordboxXml(xmlPath);
   return auditLibrary(library, xmlPath);
+}
+
+function renderPrivacyNotice(): string {
+  return `Rekordbox Amigo privacy boundary
+
+- Reads Rekordbox XML exports you choose.
+- Runs locally in the CLI; the browser audit parses XML in your browser.
+- Never writes to the Rekordbox database.
+- Never edits, moves, or deletes music files.
+- Missing-file checks only test whether local file paths exist.
+- Suggested tags and set plans are advice until you manually apply them.
+`;
 }
 
 program.parseAsync().catch((error: unknown) => {

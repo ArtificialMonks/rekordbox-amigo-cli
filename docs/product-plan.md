@@ -2,9 +2,11 @@
 
 ## Positioning
 
-Rekordbox Amigo is a library doctor and creative prep assistant for DJs.
+Rekordbox Amigo is a library coach and creative prep assistant for DJs.
 
 It starts with a safe audit, then helps DJs tag, search, and prepare sets with an Amigo-style CLI conversation.
+
+Default strategic path: **Library Coach**. The audit is the funnel; Amigo-guided taxonomy and set narrative are the product.
 
 ## MVP
 
@@ -27,6 +29,7 @@ The audit is the lead magnet, not the moat. The moat is what happens after the a
 
 ## v1 Paid Product
 
+- Pricing default: free Audit Lite, EUR 29 one-time Audit Pro, EUR 19/month Amigo Coach.
 - Hosted account history only if the DJ explicitly opts in.
 - Persistent local library snapshots.
 - Before/after progress tracking.
@@ -51,3 +54,10 @@ The audit is the lead magnet, not the moat. The moat is what happens after the a
 - Reports before edits.
 - User approval before any future export/apply workflow.
 - Clear distinction between source metadata and suggested metadata.
+
+## Decisions To Keep Visible
+
+- Primary ICP: working DJs with 5,000 to 40,000 tracks.
+- Competitive stance: complement Djoid, Lexicon, and Mixed In Key before competing with them.
+- Audio analysis is a post-validation decision, not an MVP dependency.
+- Naming still needs a deliberate call: Amigo product family versus separate music brand.

@@ -5,7 +5,8 @@ import { auditRekordboxXmlInBrowser } from "./localAudit";
 const commands = [
   "rb-amigo audit --xml ./rekordbox.xml --out ./reports/audit.md",
   "rb-amigo tags --audit ./reports/audit.json",
-  "rb-amigo set-plan --audit ./reports/audit.json --hours 3 --context afterhours --vibe hypnotic --curve wave --anchor \"your track\"",
+  "rb-amigo set-plan --audit ./reports/audit.json --hours 3 --context afterhours --vibe hypnotic --energy wave --anchor \"your track\" --bridge \"deep house to organic\"",
+  "rb-amigo privacy",
   "rb-amigo amigo"
 ];
 
@@ -16,6 +17,27 @@ const features = [
   "Starter tagging suggestions",
   "Chapter-based set-prep prompts",
   "Amigo-style conversational CLI guidance"
+];
+
+const tiers = [
+  {
+    name: "Audit Lite",
+    price: "€0",
+    detail: "Free browser audit",
+    points: ["First read on your XML", "Headline issue counts", "Local browser parsing", "Email capture later"]
+  },
+  {
+    name: "Audit Pro",
+    price: "€29",
+    detail: "One time deep audit",
+    points: ["Full report", "Tagging suggestion pack", "Set plan starter pack", "Lifetime access to this version"]
+  },
+  {
+    name: "Amigo Coach",
+    price: "€19",
+    detail: "Monthly, cancel any time",
+    points: ["Ongoing coaching", "Personal taxonomy", "Unlimited re-audits", "Priority support"]
+  }
 ];
 
 export function App() {
@@ -52,9 +74,9 @@ export function App() {
       <section className="hero">
         <div className="heroText">
           <p className="eyebrow">Artificial Monks music tools</p>
-          <h1>Ask Amigo what is hiding.</h1>
+          <h1>Your rekordbox library knows more than it tells you.</h1>
           <p className="lede">
-            Private browser audit for your Rekordbox XML. Use the CLI for tags, crates, and set arcs.
+            Start with a private XML audit. Then let Amigo turn the report into tags, crates, and set arcs.
           </p>
           <div className="actions">
             <a href="#audit">Run audit</a>
@@ -67,7 +89,7 @@ export function App() {
           <p>Missing files: 12</p>
           <p>Possible duplicates: 38</p>
           <p>Weak metadata tracks: 421</p>
-          <em>Next: review afterhours crate.</em>
+          <em>Next: build your Library Coach plan.</em>
         </div>
       </section>
 
@@ -107,6 +129,43 @@ export function App() {
         </div>
       </section>
 
+      <section className="coachPanel">
+        <div>
+          <p className="eyebrow">Library Coach</p>
+          <h2>The audit is the start. The conversation is the product.</h2>
+          <p>
+            Amigo Coach turns a report into a working plan: tag packs you can apply by hand,
+            set arcs built around tracks you forgot you had, and a taxonomy that learns how you think.
+          </p>
+        </div>
+        <div className="proofList">
+          <span>For working DJs with 5,000 to 40,000 tracks.</span>
+          <span>Works alongside Djoid, Lexicon, and Mixed In Key.</span>
+          <span>Does not replace your tools. Makes them easier to trust.</span>
+        </div>
+      </section>
+
+      <section className="pricing">
+        <div>
+          <p className="eyebrow">Recommended pricing</p>
+          <h2>Free audit. Paid coaching when the library starts making sense.</h2>
+        </div>
+        <div className="tierGrid">
+          {tiers.map((tier) => (
+            <article className="tierCard" key={tier.name}>
+              <p className="eyebrow">{tier.name}</p>
+              <strong>{tier.price}</strong>
+              <span>{tier.detail}</span>
+              <ul>
+                {tier.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section id="mvp" className="band">
         <div>
           <p className="eyebrow">Why it is different</p>
@@ -139,6 +198,17 @@ export function App() {
         <p>
           The web audit runs in the browser, and the CLI runs on your machine. We start with reports and reviewable suggestions,
           not risky Rekordbox database writes or silent cloud sync.
+        </p>
+      </section>
+
+      <section className="band split">
+        <div>
+          <p className="eyebrow">90 day focus</p>
+          <h2>Do not chase full audio AI yet.</h2>
+        </div>
+        <p>
+          Ship the hosted audit, then conversational tag suggestions, then three cornerstone posts.
+          Decide audio analysis after real users ask for it. Until then, the moat is voice, taxonomy, and set narrative.
         </p>
       </section>
     </main>

@@ -1,8 +1,10 @@
 # Rekordbox Amigo CLI
 
-A local-first DJ library assistant for Rekordbox.
+A local-first DJ library coach for Rekordbox.
 
 `rb-amigo` starts with a safe audit, then helps DJs decide what to do next: fix broken references, review weak metadata, draft tag suggestions, and shape set arcs. The CLI is the engine; Amigo is the workflow.
+
+The strategic path is **Library Coach**: the audit is the free funnel, and the paid product is the conversation that turns the audit into a usable tagging and set-prep system.
 
 Try the browser audit at https://rekordbox-amigo-cli.vercel.app. It runs locally in the browser and does not upload your XML.
 
@@ -39,7 +41,8 @@ Then run:
 rb-amigo audit --xml ./rekordbox.xml --format markdown --out ./reports/library-audit.md
 rb-amigo audit --xml ./rekordbox.xml --format json --out ./reports/library-audit.json
 rb-amigo tags --audit ./reports/library-audit.json
-rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours --vibe hypnotic --curve wave --anchor "your track"
+rb-amigo set-plan --audit ./reports/library-audit.json --hours 3 --context afterhours --vibe hypnotic --energy wave --anchor "your track" --bridge "deep house to organic"
+rb-amigo privacy
 rb-amigo amigo
 ```
 
@@ -64,4 +67,4 @@ This repo is both:
 1. A real CLI MVP for library audit and tagging support.
 2. A Vercel-ready product surface for Artificial Monks to validate demand, collect subscribers, and grow into a larger music-intelligence tool.
 
-See [docs/research.md](./docs/research.md) and [docs/product-plan.md](./docs/product-plan.md).
+See [docs/research.md](./docs/research.md), [docs/product-plan.md](./docs/product-plan.md), and [docs/strategy-review.md](./docs/strategy-review.md).

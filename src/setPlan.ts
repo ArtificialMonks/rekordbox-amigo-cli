@@ -4,9 +4,13 @@ export type SetPlanOptions = {
   hours: number;
   context: string;
   vibe?: string;
-  curve?: "low-to-high" | "wave" | "flat";
+  curve?: EnergyCurve;
   anchor?: string;
+  bridge?: string;
+  avoid?: string;
 };
+
+export type EnergyCurve = "low-to-high" | "wave" | "flat" | "double-peak";
 
 export function renderSetPlan(audit: LibraryAudit, options: SetPlanOptions): string {
   const chapters = buildChapters(options);
@@ -14,12 +18,14 @@ export function renderSetPlan(audit: LibraryAudit, options: SetPlanOptions): str
   const blockers = audit.findings.filter((finding) => finding.issues.includes("missing_file")).length;
   const vibe = options.vibe ? `\nVibe: ${options.vibe}` : "";
   const anchor = options.anchor ? `\nAnchor track: ${options.anchor}` : "";
+  const bridge = options.bridge ? `\nBridge goal: ${options.bridge}` : "";
+  const avoid = options.avoid ? `\nAvoid: ${options.avoid}` : "";
 
   return `# Amigo Set Plan
 
 Context: ${options.context}
 Length: ${options.hours} hours
-Energy curve: ${options.curve ?? "wave"}${vibe}${anchor}
+Energy curve: ${options.curve ?? "wave"}${vibe}${anchor}${bridge}${avoid}
 
 ## Library Readiness
 
@@ -35,11 +41,21 @@ ${chapters.map((chapter, index) => `${index + 1}. ${chapter}`).join("\n")}
 
 Ask Amigo:
 
-> Build me a ${options.hours}-hour ${options.context} journey${options.vibe ? ` with a ${options.vibe} feeling` : ""}${options.anchor ? ` around "${options.anchor}"` : ""}. Use a ${options.curve ?? "wave"} energy curve, start from tracks with strong metadata, avoid missing-file blockers, and make a review crate for tracks needing genre, mood, or energy labels.
+> Build me a ${options.hours}-hour ${options.context} journey${options.vibe ? ` with a ${options.vibe} feeling` : ""}${options.anchor ? ` around "${options.anchor}"` : ""}${options.bridge ? ` that bridges ${options.bridge}` : ""}. Use a ${options.curve ?? "wave"} energy curve, start from tracks with strong metadata, avoid missing-file blockers${options.avoid ? `, avoid ${options.avoid}` : ""}, and make a review crate for tracks needing genre, mood, or energy labels.
 `;
 }
 
 function buildChapters(options: SetPlanOptions): string[] {
+  if (options.curve === "double-peak") {
+    return [
+      "Open: define the room and avoid early overstatement",
+      "First lift: a controlled peak that tests the crowd",
+      "Reset: reduce density and create room for surprise",
+      "Second lift: stronger emotional release with trusted anchors",
+      "Land: finish with identity, not exhaustion"
+    ];
+  }
+
   if (options.curve === "flat") {
     return [
       "Hold: establish a stable lane and stay inside it",

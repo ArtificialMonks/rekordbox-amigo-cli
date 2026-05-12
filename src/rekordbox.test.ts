@@ -87,10 +87,14 @@ describe("local music intelligence helpers", () => {
       context: "afterhours",
       vibe: "hypnotic",
       curve: "wave",
-      anchor: "Deep Acid Motion"
+      anchor: "Deep Acid Motion",
+      bridge: "deep house to organic",
+      avoid: "anything played in last 30 days"
     });
 
     expect(plan).toContain("Vibe: hypnotic");
     expect(plan).toContain("Anchor track: Deep Acid Motion");
+    expect(plan).toContain("Bridge goal: deep house to organic");
+    expect(plan).toContain("Avoid: anything played in last 30 days");
   });
 });
