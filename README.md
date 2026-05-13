@@ -1,10 +1,10 @@
 # Rekordbox Amigo CLI
 
-A local-first DJ library coach for Rekordbox.
+A local-first library coach for Rekordbox users and DJs.
 
-`rb-amigo` starts with a safe audit, then helps DJs decide what to do next: fix broken references, review weak metadata, draft tag suggestions, and shape set arcs. The CLI is the engine; Amigo is the workflow.
+`rb-amigo` starts with a safe audit, then helps Rekordbox users decide what to do next: fix broken references, review weak metadata, draft tag suggestions, and shape crates or set arcs. The CLI is the engine; Amigo is the workflow.
 
-The strategic path is **Library Coach**: the audit is the free funnel, and the paid product is the conversation that turns the audit into a usable tagging and set-prep system.
+The strategic path is **Library Coach**: the audit is the free funnel, and the product is the conversation that turns the audit into a usable cleanup, tagging, and prep system.
 
 Try the browser audit at https://rekordbox-amigo-cli.vercel.app. It runs locally in the browser and does not upload your XML.
 
@@ -27,7 +27,7 @@ Try the browser audit at https://rekordbox-amigo-cli.vercel.app. It runs locally
 
 ## Install
 
-For DJs, the hosted browser audit is the easiest first step. For developers and power users:
+For most Rekordbox users, the hosted browser audit is the easiest first step. For CLI users, developers, and power users:
 
 ```bash
 npm install

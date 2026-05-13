@@ -6,7 +6,7 @@ The MVP is credible, but the audit is not the product. The audit is the free dia
 
 ## Positioning Choice
 
-Choose Path B: **Library Coach**.
+Choose Path B: **General Library Coach**.
 
 - Free audit as the funnel.
 - Conversational tagging and set planning as the paid product.
@@ -14,11 +14,13 @@ Choose Path B: **Library Coach**.
 - CLI plus hosted web as the first two surfaces.
 - Avoid direct head-to-head with Djoid and Lexicon on full management or full AI set planning.
 
-## Primary ICP
+## Audience Model
 
-Working DJs with roughly 5,000 to 40,000 tracks.
+Public story: all Rekordbox users who want less library friction.
 
-They gig weekly or monthly, already feel library pain, and may already pay for Djoid, Lexicon, Mixed In Key, or similar tools. They will pay for a tool that helps them think about their library instead of fight it.
+The first users can be bedroom DJs, mobile and wedding DJs, club residents, radio selectors, collectors, and working pros. The shared pain is not status; it is friction: broken locations, duplicate imports, unknown files, weak tags, scattered folders, and set prep that takes too long.
+
+Power users with roughly 5,000 to 40,000 tracks are still the deepest paid segment, but they should not define the whole story. The broad promise is: make any Rekordbox library easier to trust.
 
 ## Pricing Default
 
@@ -53,6 +55,7 @@ Position as complementary:
 - `taxonomy show`
 - `taxonomy refine "organic vs deep house"`
 - `tags --use-taxonomy mine`
+- `match-folder --xml ./rekordbox.xml --folder ./Downloads/new-crate`
 - One-line Mac install path.
 - Screenshot-friendly report output.
 

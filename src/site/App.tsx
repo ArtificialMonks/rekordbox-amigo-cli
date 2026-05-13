@@ -14,6 +14,7 @@ const features = [
   "Read-only Rekordbox XML audits",
   "Missing file and duplicate detection",
   "Genre, label, comment, key, BPM, year, rating, and color gaps",
+  "Incoming folder and crate matching",
   "Starter tagging suggestions",
   "Chapter-based set-prep prompts",
   "Amigo-style conversational CLI guidance"
@@ -76,7 +77,7 @@ export function App() {
           <p className="eyebrow">Artificial Monks music tools</p>
           <h1>Your rekordbox library knows more than it tells you.</h1>
           <p className="lede">
-            Start with a private XML audit. Then let Amigo turn the report into tags, crates, and set arcs.
+            Start with a private XML audit. Then let Amigo turn the report into cleaner folders, better tags, sharper crates, and set arcs.
           </p>
           <div className="actions">
             <a href="#audit">Run audit</a>
@@ -134,14 +135,14 @@ export function App() {
           <p className="eyebrow">Library Coach</p>
           <h2>The audit is the start. The conversation is the product.</h2>
           <p>
-            Amigo Coach turns a report into a working plan: tag packs you can apply by hand,
-            set arcs built around tracks you forgot you had, and a taxonomy that learns how you think.
+            Amigo Coach turns a report into a working plan: fixes you can trust, tag packs you can apply by hand,
+            crates built around tracks you forgot you had, and a taxonomy that learns how you think.
           </p>
         </div>
         <div className="proofList">
-          <span>For working DJs with 5,000 to 40,000 tracks.</span>
-          <span>Works alongside Djoid, Lexicon, and Mixed In Key.</span>
-          <span>Does not replace your tools. Makes them easier to trust.</span>
+          <span>For bedroom DJs, mobile DJs, club residents, collectors, and working pros.</span>
+          <span>Works with simple exports, messy Downloads folders, deep archives, and USB prep.</span>
+          <span>Does not replace your tools. Makes your Rekordbox library easier to trust.</span>
         </div>
       </section>
 
@@ -181,7 +182,7 @@ export function App() {
       <section id="install" className="install">
         <div>
           <p className="eyebrow">CLI</p>
-          <h2>Four commands to make a library actionable.</h2>
+          <h2>Five commands to make a library actionable.</h2>
         </div>
         <div className="commandList">
           {commands.map((command) => (
